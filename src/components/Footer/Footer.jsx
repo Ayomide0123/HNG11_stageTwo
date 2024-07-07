@@ -1,64 +1,29 @@
+import logo from "../../assets/img/mdi--ring.png";
+
 const Footer = () => {
   return (
     <div className="bg-[#9C5E29] text-white">
-      <div className="grid grid-cols-4">
-        <div>
-          <p>Contact Us</p>
-          <ul>
-            <li>
-              <img /> +234-357 4737 833
-            </li>
-            <li>
-              <img /> info@Blings
-            </li>
-            <li>
-              <img /> 12BD, mailing it over 2000
-            </li>
-          </ul>
+      <div className="flex justify-between px-12 py-3">
+        <div className="w-[100px] flex flex-col items-center text-white">
+          <img src={logo} width="24px" height="auto" alt="Logo" />
+          <p className="logo--text -mt-2">Bling</p>
         </div>
 
-        <div>
-          <p>Quick Links</p>
-          <ul>
+        <div className="poppins-light">
+          <ul className="flex justify-between w-[400px]">
             <li>Home</li>
-            <li>About Us</li>
+            <li>About</li>
             <li>Products</li>
-            <li>Services</li>
-            <li>FAQs</li>
           </ul>
         </div>
 
-        <div>
-          <p>Categories</p>
-          <ul>
-            <li>Gold</li>
-            <li>Engagement Us</li>
-            <li>Beads</li>
-            <li>Necklaces</li>
-            <li>Rings</li>
-          </ul>
-        </div>
-
-        <div>
-          <p>Connect with us</p>
-          <form>
-            <p>
-              Enter your Email below for discounts and notifications on new
-              arrivals
-            </p>
-            <input />
-            <button>Subscribe</button>
-          </form>
-          <div>
-            <img />
-            <img />
-            <img />
-          </div>
+        <div className="poppins-light">
+          <p>07040525298</p>
         </div>
       </div>
       <hr />
-      <div>
-        <p>© 2024 All Rights Reserved - Blings</p>
+      <div className="py-2 poppins-light">
+        <p className="text-center">© 2024 All Rights Reserved - Blings</p>
       </div>
     </div>
   );

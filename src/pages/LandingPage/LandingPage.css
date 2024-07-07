@@ -8,3 +8,11 @@
   object-fit: cover; /* Ensure the entire image fits within the div */
   object-position: center; /* Center the image */
 }
+
+.hr--element {
+  border: none;
+  width: 80%;
+  height: 3px;
+  border-radius: 10px;
+  background-color: #9c5e29;
+}

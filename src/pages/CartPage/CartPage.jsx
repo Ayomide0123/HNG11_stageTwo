@@ -100,7 +100,7 @@ const CartPage = () => {
               </div>
             </div>
 
-            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] border-x-[60px] lg:border-x-0">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] sm:border-x-[60px] border-x-[20px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
                 <img src={shoping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">
@@ -271,7 +271,7 @@ const CartPage = () => {
               </form>
             </div>
 
-            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] border-x-[60px] lg:border-x-0">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] sm:border-x-[60px] border-x-[20px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
                 <img src={shoping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">
@@ -414,7 +414,7 @@ const CartPage = () => {
               </div>
             </div>
 
-            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] border-x-[60px] lg:border-x-0">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] sm:border-x-[60px] border-x-[20px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
                 <img src={shoping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">

@@ -1,16 +1,24 @@
 import cartBgImg from "../../assets/img/cartPage--bg-img.png";
 import visa from "../../assets/img/visa-card.png";
 import mastercard from "../../assets/img/mastercard.png";
+import shoping_cart from "../../assets/img/shopping--cart.svg";
 import CartItem from "../../components/CartItems/CartItem";
-import cartItems from "../../components/CartItems/CartItems.json";
+import cart_list from "./CartList";
 import Recent from "../../components/Recent/Recent";
-import recentItems from "../../components/Recent/Recent.json";
+import recent_viewed from "../../components/Recent/RecentlyViewed";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const CartPage = () => {
   const [current, setCurrent] = useState("cart");
+  const [selectedOption, setSelectedOption] = useState(""); // State to track selected option
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value); // Update selected option when radio button is clicked
+  };
   return (
     <div>
       <header className="relative">
@@ -50,53 +58,109 @@ const CartPage = () => {
       <main className="bg-slate-400">
         {current === "cart" ? (
           <div className="grid grid-cols-2fr-1fr gap-4 mt-9 px-36 py-8">
-            <div className="bg-white p-9">
-              <div className="flex justify-between">
-                <p>Shopping Cart</p>
-                <p>4 Items</p>
+            <div className="bg-white p-9 rounded-lg">
+              <div className="flex justify-between px-2 pb-3">
+                <div className="flex items-center gap-2">
+                  <img src={shoping_cart} />
+                  <h1 className="text-[#9C5E29] font-bold text-xl">
+                    Shopping Cart
+                  </h1>
+                </div>
+                <h1 className="text-[#9C5E29] font-bold text-xl">3 Items</h1>
               </div>
               <hr />
               <div>
-                <ul className="flex justify-end gap-48">
+                <ul className="flex py-5 pr-3 justify-end gap-28 text-[#BDBDBD]">
                   <li>Product Details</li>
                   <li>Price</li>
                   <li>Quantity</li>
                   <li>Total</li>
                 </ul>
               </div>
-              <div>
-                {cartItems.map((product) => (
+              <div className="-mt-4">
+                {cart_list.map((product) => (
                   <CartItem
                     key={product.id}
                     name={product.name}
                     price={product.price}
+                    quantity={product.quantity}
+                    image={product.image}
+                    metal={product.metal}
+                    size={product.size}
                   />
                 ))}
               </div>
-              <div>
-                <button>Continue Shopping</button>
+              <div className="flex justify-center">
+                <button className="px-5 py-2 w-[30%] bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider">
+                  <Link to="/">CONTINUE SHOPPING</Link>
+                </button>
               </div>
             </div>
 
-            <div className="bg-white p-9">
-              <div className="flex justify-between">
-                <p>Shopping Cart</p>
-                <p>4 Items</p>
+            <div className="bg-white p-9 rounded-lg border-[#9C5E29] border-y-[20px]">
+              <div className="flex justify-center gap-2 my-4">
+                <img src={shoping_cart} className="w-6" />
+                <p className="text-[#9C5E29] font-bold text-lg">
+                  Order Summary
+                </p>
               </div>
               <hr />
+
+              <div className="flex flex-col gap-6 mt-6 mb-16">
+                <div>
+                  <h1 className="flex items-center font-bold tracking-wide">
+                    Price Details (4)
+                  </h1>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Sub Total</p>
+                  <p className="font-bold tracking-wide">$ 415,000</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Item Discount</p>
+                  <p className="font-bold tracking-wide">$ 0.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Coupon Discount</p>
+                  <p className="font-bold tracking-wide">$ 0.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Shipping fee</p>
+                  <p className="font-bold tracking-wide">$ 100.00</p>
+                </div>
+              </div>
+
+              <hr />
+              <div className="flex justify-between my-6">
+                <p className="font-bold tracking-wide">Total Amount</p>
+                <p className="font-bold tracking-wide text-[#9C5E29]">
+                  $ 515,000
+                </p>
+              </div>
               <button
-                onClick={() => {
-                  setCurrent("address");
-                }}
+                className="mb-6 px-5 py-2 w-[100%] bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider"
+                onClick={() => setCurrent("address")}
               >
-                laaaaaaaaaa
+                <Link>CHECKOUT</Link>
               </button>
+
+              <hr />
+
+              <div className="mt-6">
+                <h1 className="flex items-center font-bold tracking-wide text-green-500">
+                  $ 200 OFF your next ORDER
+                </h1>
+              </div>
             </div>
           </div>
         ) : current === "address" ? (
           <div className="grid grid-cols-2fr-1fr gap-4 mt-9 px-36 py-8">
-            <div className="bg-white p-9">
-              <h2 className="text-lg font-semibold mb-4">Simple Form</h2>
+            <div className="bg-white p-9 rounded-lg">
+              <div className="flex text-[#9C5E29] justify-center items-center gap-2 my-4 mb-6">
+                <Icon icon="fa-solid:shipping-fast" />
+                <p className="font-bold text-lg">Shipping Details</p>
+              </div>
+
               <form>
                 <div className="flex gap-2 mb-4">
                   <div className="w-[50%]">
@@ -104,15 +168,16 @@ const CartPage = () => {
                       htmlFor="firstName"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      First Name
+                      First Name *
                     </label>
                     <input
                       type="text"
                       id="firstName"
                       name="firstName"
+                      placeholder="First name"
                       // value={formData.firstName}
                       // onChange={handleChange}
-                      className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
                       required
                     />
                   </div>
@@ -122,15 +187,16 @@ const CartPage = () => {
                       htmlFor="lastName"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Last Name
+                      Last Name *
                     </label>
                     <input
                       type="text"
                       id="lastName"
                       name="lastName"
+                      placeholder="Last name"
                       // value={formData.lastName}
                       // onChange={handleChange}
-                      className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="mt-1 px-3 py-3 border-gray-300 border-solid border-2 w-full rounded-md shadow-sm sm:text-sm"
                       required
                     />
                   </div>
@@ -141,15 +207,16 @@ const CartPage = () => {
                     htmlFor="address"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Address
+                    Address *
                   </label>
                   <input
                     type="text"
                     id="address"
                     name="address"
+                    placeholder="Street address"
                     // value={formData.address}
                     // onChange={handleChange}
-                    className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm"
                     required
                   />
                 </div>
@@ -159,15 +226,16 @@ const CartPage = () => {
                     htmlFor="phoneNumber"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Phone Number
+                    Phone *
                   </label>
                   <input
                     type="tel"
                     id="phoneNumber"
                     name="phoneNumber"
+                    placeholder="+234"
                     // value={formData.phoneNumber}
                     // onChange={handleChange}
-                    className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm"
                     required
                   />
                 </div>
@@ -177,150 +245,240 @@ const CartPage = () => {
                     htmlFor="message"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Message
+                    Order notes
                   </label>
                   <textarea
                     id="message"
                     name="message"
+                    placeholder="Type your message here..."
                     // value={formData.message}
                     // onChange={handleChange}
                     rows={4}
-                    className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm  sm:text-sm"
                     required
                   />
                 </div>
+                <div className="flex justify-between -mb-5">
+                  <button
+                    className="mb-6 py-2 w-[37%] poppins-light text-sm tracking-wider"
+                    onClick={() => setCurrent("cart")}
+                  >
+                    <Link className="flex justify-start items-center gap-2 font-semibold">
+                      <Icon icon="ant-design:left-outlined" /> RETURN TO CART
+                    </Link>
+                  </button>
 
-                <button
-                  type="submit"
-                  className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  onClick={() => setCurrent("payment")}
-                >
-                  Submit
-                </button>
+                  <button
+                    className="mb-6 py-2 w-[37%] bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider"
+                    onClick={() => setCurrent("payment")}
+                  >
+                    <Link>PROCEED TO PAYMENT</Link>
+                  </button>
+                </div>
               </form>
             </div>
 
-            <div className="bg-white p-9">
-              <div className="flex justify-between">
-                <p>Shopping Cart</p>
-                <p>4 Items</p>
+            <div className="bg-white p-9 rounded-lg border-[#9C5E29] border-y-[20px]">
+              <div className="flex justify-center gap-2 my-4">
+                <img src={shoping_cart} className="w-6" />
+                <p className="text-[#9C5E29] font-bold text-lg">
+                  Order Summary
+                </p>
               </div>
               <hr />
+
+              <div className="flex flex-col gap-6 mt-6 mb-16">
+                <div>
+                  <h1 className="flex items-center font-bold tracking-wide">
+                    Price Details (4)
+                  </h1>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Sub Total</p>
+                  <p className="font-bold tracking-wide">$ 415,000</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Item Discount</p>
+                  <p className="font-bold tracking-wide">$ 0.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Coupon Discount</p>
+                  <p className="font-bold tracking-wide">$ 0.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Shipping fee</p>
+                  <p className="font-bold tracking-wide">$ 100.00</p>
+                </div>
+              </div>
+
+              <hr />
+              <div className="flex justify-between my-6">
+                <p className="font-bold tracking-wide">Total Amount</p>
+                <p className="font-bold tracking-wide text-[#9C5E29]">
+                  $ 515,000
+                </p>
+              </div>
+
+              <hr />
+
+              <div className="mt-6">
+                <h1 className="flex items-center font-bold tracking-wide text-green-500">
+                  $ 200 OFF your next ORDER
+                </h1>
+              </div>
             </div>
           </div>
         ) : (
           <div className="grid grid-cols-2fr-1fr gap-4 mt-9 px-36 py-8">
-            <div className="bg-white p-9">
-              <h2 className="text-lg font-semibold mb-4 text-center">
+            <div className="bg-white px-9 pt-14 rounded-lg">
+              <h2 className="text-xl font-bold mb-1 text-center text-[#9C5E29]">
                 Payment
               </h2>
-              <p className="text-lg font-semibold mb-4 text-center">
+              <p className="text-lg font-medium mb-7 text-center">
                 All transactions are secure and encrypted
               </p>
               <form>
-                <div className="flex justify-between items-center mb-4 bg-slate-500 p-3">
-                  <label className="block text-sm font-medium text-gray-700">
+                <div className="flex justify-between items-center mb-4 bg-[#abcbf59e] p-3 rounded-t-lg">
+                  {/* <label className="flex text-xl font-medium items-center">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="creditCard"
-                      className="mr-2"
+                      className="appearance-none checked:bg-[#9C5E29] checked:border-l-8 mr-2 w-6 h-6"
                     />
                     Credit Card
-                  </label>
+                  </label> */}
+
+                  <div>
+                    <label className="flex items-center space-x-2 text-xl font-medium cursor-pointer">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="creditCard"
+                        className="hidden"
+                        checked={selectedOption === "creditCard"}
+                        onChange={handleOptionChange}
+                      />
+                      <div className="w-6 h-6 flex items-center justify-center border-2 rounded-full border-black">
+                        {selectedOption === "creditCard" && (
+                          <div className="w-3 h-3 rounded-full bg-black"></div>
+                        )}
+                      </div>
+                      <span>Credit Card</span>
+                    </label>
+                  </div>
                   <div className="flex gap-2">
                     <img src={visa} />
                     <img src={mastercard} />
                   </div>
                 </div>
                 <div className="mb-4">
-                  <label
-                    htmlFor="cardNumber"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Card Number
-                  </label>
                   <input
                     type="text"
                     id="cardNumber"
                     name="cardNumber"
+                    placeholder="Card number"
                     // value={formData.cardNumber}
                     // onChange={handleChange}
-                    className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
                     required
                   />
                 </div>
 
                 <div className="mb-4">
-                  <label
-                    htmlFor="expirationDate"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Expiration Date
-                  </label>
                   <input
                     type="text"
-                    id="expirationDate"
-                    name="expirationDate"
+                    id="CardName"
+                    name="cardName"
+                    placeholder="Card Name"
                     // value={formData.expirationDate}
                     // onChange={handleChange}
-                    className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required
-                    placeholder="MM/YY"
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label
-                    htmlFor="cvv"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    CVV
-                  </label>
-                  <input
-                    type="text"
-                    id="cvv"
-                    name="cvv"
-                    // value={formData.cvv}
-                    // onChange={handleChange}
-                    className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
                     required
                   />
                 </div>
 
-                <div className="mb-4">
-                  <label
-                    htmlFor="cardholderName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Cardholder Name
-                  </label>
-                  <input
-                    type="text"
-                    id="cardholderName"
-                    name="cardholderName"
-                    // value={formData.cardholderName}
-                    // onChange={handleChange}
-                    className="mt-1 px-3 py-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required
-                  />
+                <div className="flex mb-4 gap-4">
+                  <div className="w-[50%]">
+                    <input
+                      type="text"
+                      id="expirationDate"
+                      name="expirationDate"
+                      placeholder="Exp. Date (MM/YY)"
+                      className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full"
+                      required
+                    />
+                  </div>
+
+                  <div className="w-[50%]">
+                    <input
+                      type="text"
+                      id="cvv"
+                      name="cvv"
+                      placeholder="CVV"
+                      className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="mt-5 px-4 py-3 bg-[#9C5E29] text-white rounded-md w-full tracking-wide poppins-light"
                 >
-                  Submit Payment
+                  PAY NOW
                 </button>
               </form>
             </div>
 
-            <div className="bg-white p-9">
-              <div className="flex justify-between">
-                <p>Shopping Cart</p>
-                <p>4 Items</p>
+            <div className="bg-white p-9 rounded-lg border-[#9C5E29] border-y-[20px]">
+              <div className="flex justify-center gap-2 my-4">
+                <img src={shoping_cart} className="w-6" />
+                <p className="text-[#9C5E29] font-bold text-lg">
+                  Order Summary
+                </p>
               </div>
               <hr />
+
+              <div className="flex flex-col gap-6 mt-6 mb-16">
+                <div>
+                  <h1 className="flex items-center font-bold tracking-wide">
+                    Price Details (4)
+                  </h1>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Sub Total</p>
+                  <p className="font-bold tracking-wide">$ 415,000</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Item Discount</p>
+                  <p className="font-bold tracking-wide">$ 0.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Coupon Discount</p>
+                  <p className="font-bold tracking-wide">$ 0.00</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-[#BDBDBD]">Shipping fee</p>
+                  <p className="font-bold tracking-wide">$ 100.00</p>
+                </div>
+              </div>
+
+              <hr />
+              <div className="flex justify-between my-6">
+                <p className="font-bold tracking-wide">Total Amount</p>
+                <p className="font-bold tracking-wide text-[#9C5E29]">
+                  $ 515,000
+                </p>
+              </div>
+
+              <hr />
+
+              <div className="mt-6">
+                <h1 className="flex items-center font-bold tracking-wide text-green-500">
+                  $ 200 OFF your next ORDER
+                </h1>
+              </div>
             </div>
           </div>
         )}
@@ -329,20 +487,25 @@ const CartPage = () => {
           ""
         ) : (
           <div>
-            <p className="">Recently Viewed</p>
-            <div className="grid grid-cols-4">
-              {recentItems.map((item) => (
-                <Recent key={item.id} name={item.name} price={item.price} />
+            <p className="py-7 pl-7 text-2xl font-bold text-[#9C5E29]">
+              Recently Viewed
+            </p>
+            <div className="grid grid-cols-4 mt-[100px] place-items-center">
+              {recent_viewed.map((item) => (
+                <Recent
+                  key={item.id}
+                  name={item.name}
+                  price={item.price}
+                  image={item.image}
+                />
               ))}
             </div>
           </div>
         )}
 
         {current === "payment" ? "" : <Newsletter />}
-      </main>
-      <footer>
         <Footer />
-      </footer>
+      </main>
     </div>
   );
 };

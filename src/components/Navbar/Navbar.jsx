@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const cartItemsCount = 3;
+  const cartItemsCount = 3; // Example count of cart items
 
   const getFillColor = (path) => {
     return location.pathname === path ? "#FB7400" : "white";

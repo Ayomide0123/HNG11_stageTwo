@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/img/mdi--ring.png";
 import { Icon } from "@iconify/react";
@@ -17,6 +17,19 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  // Function to scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Optional: smooth scrolling animation
+    });
+  };
+
+  // Scroll to top whenever menu state changes
+  useEffect(() => {
+    scrollToTop();
+  }, [menu]);
 
   return (
     <div className="fixed top-10 w-full z-50">

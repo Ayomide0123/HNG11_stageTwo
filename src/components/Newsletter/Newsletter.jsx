@@ -3,7 +3,7 @@ import "./Newsletter.css";
 
 const Newsletter = () => {
   return (
-    <div className="relative h-screen text-white flex justify-center items-center overflow-hidden my-16">
+    <div className="relative h-screen text-white flex justify-center items-center overflow-hidden -mb-2">
       <img
         src={newsletterBgImage}
         className="absolute inset-0 w-full h-full object-cover"

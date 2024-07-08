@@ -22,43 +22,44 @@ const CartPage = () => {
   return (
     <div>
       <header className="relative">
-        {/* <img src={cartBgImg} className="absolute -z-10 w-[100vw] h-[40vh]" /> */}
         <img
           src={cartBgImg}
-          className="w-[100vw] h-56 object-cover absolute -z-10"
+          className="w-full h-56 object-cover absolute -z-10"
           alt="Description"
         />
-        <div className="flex justify-center items-center gap-5 pt-40">
-          {/* <h1 className="text-white">Cart</h1> */}
+        <div className="flex flex-wrap justify-center items-center gap-5 pt-40">
           <h1
             className={`cursor-pointer ${
               current === "cart" ? "text-[#9C5E29]" : "text-white"
             }`}
+            onClick={() => setCurrent("cart")}
           >
             Cart
           </h1>
-          <hr className="w-56" />
+          <hr className="w-16 sm:w-56" />
           <h1
             className={`cursor-pointer ${
               current === "address" ? "text-[#9C5E29]" : "text-white"
             }`}
+            onClick={() => setCurrent("address")}
           >
             Address
           </h1>
-          <hr className="w-56" />
+          <hr className="w-16 sm:w-56" />
           <h1
             className={`cursor-pointer ${
               current === "payment" ? "text-[#9C5E29]" : "text-white"
             }`}
+            onClick={() => setCurrent("payment")}
           >
             Payment
           </h1>
         </div>
       </header>
-      <main className="bg-slate-400">
+      <main className="bg-[#C7CCD9]">
         {current === "cart" ? (
-          <div className="grid grid-cols-2fr-1fr gap-4 mt-9 px-36 py-8">
-            <div className="bg-white p-9 rounded-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-9 px-4 sm:px-16 lg:px-36 py-8">
+            <div className="lg:col-span-2 bg-white p-6 sm:p-9 rounded-lg">
               <div className="flex justify-between px-2 pb-3">
                 <div className="flex items-center gap-2">
                   <img src={shoping_cart} />
@@ -70,7 +71,7 @@ const CartPage = () => {
               </div>
               <hr />
               <div>
-                <ul className="flex py-5 pr-3 justify-end gap-28 text-[#BDBDBD]">
+                <ul className="flex py-5 pr-3 justify-between text-[#BDBDBD]">
                   <li>Product Details</li>
                   <li>Price</li>
                   <li>Quantity</li>
@@ -91,13 +92,13 @@ const CartPage = () => {
                 ))}
               </div>
               <div className="flex justify-center">
-                <button className="px-5 py-2 w-[30%] bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider">
+                <button className="px-5 py-2 w-full w-[40%] bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider">
                   <Link to="/">CONTINUE SHOPPING</Link>
                 </button>
               </div>
             </div>
 
-            <div className="bg-white p-9 rounded-lg border-[#9C5E29] border-y-[20px]">
+            <div className="bg-white p-6 sm:p-9 rounded-lg border-[#9C5E29] border-y-[20px] border-x-[90px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
                 <img src={shoping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">
@@ -138,7 +139,7 @@ const CartPage = () => {
                 </p>
               </div>
               <button
-                className="mb-6 px-5 py-2 w-[100%] bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider"
+                className="mb-6 px-5 py-2 w-full bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider"
                 onClick={() => setCurrent("address")}
               >
                 <Link>CHECKOUT</Link>
@@ -154,16 +155,16 @@ const CartPage = () => {
             </div>
           </div>
         ) : current === "address" ? (
-          <div className="grid grid-cols-2fr-1fr gap-4 mt-9 px-36 py-8">
-            <div className="bg-white p-9 rounded-lg">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-9 px-4 sm:px-16 lg:px-36 py-8">
+            <div className="lg:col-span-2 bg-white p-6 sm:p-9 rounded-lg">
               <div className="flex text-[#9C5E29] justify-center items-center gap-2 my-4 mb-6">
                 <Icon icon="fa-solid:shipping-fast" />
                 <p className="font-bold text-lg">Shipping Details</p>
               </div>
 
               <form>
-                <div className="flex gap-2 mb-4">
-                  <div className="w-[50%]">
+                <div className="flex flex-nowrapwrap gap-3 mb-4">
+                  <div className="w-full sm:w-[50%]">
                     <label
                       htmlFor="firstName"
                       className="block text-sm font-medium text-gray-700"
@@ -175,14 +176,12 @@ const CartPage = () => {
                       id="firstName"
                       name="firstName"
                       placeholder="First name"
-                      // value={formData.firstName}
-                      // onChange={handleChange}
                       className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
                       required
                     />
                   </div>
 
-                  <div className="w-[50%]">
+                  <div className="w-full sm:w-[50%]">
                     <label
                       htmlFor="lastName"
                       className="block text-sm font-medium text-gray-700"
@@ -194,8 +193,6 @@ const CartPage = () => {
                       id="lastName"
                       name="lastName"
                       placeholder="Last name"
-                      // value={formData.lastName}
-                      // onChange={handleChange}
                       className="mt-1 px-3 py-3 border-gray-300 border-solid border-2 w-full rounded-md shadow-sm sm:text-sm"
                       required
                     />
@@ -214,8 +211,6 @@ const CartPage = () => {
                     id="address"
                     name="address"
                     placeholder="Street address"
-                    // value={formData.address}
-                    // onChange={handleChange}
                     className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm"
                     required
                   />
@@ -223,42 +218,38 @@ const CartPage = () => {
 
                 <div className="mb-4">
                   <label
-                    htmlFor="phoneNumber"
+                    htmlFor="city"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Phone *
                   </label>
                   <input
-                    type="tel"
-                    id="phoneNumber"
-                    name="phoneNumber"
+                    type="number"
+                    id="phone"
+                    name="phone"
                     placeholder="+234"
-                    // value={formData.phoneNumber}
-                    // onChange={handleChange}
                     className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm"
                     required
                   />
                 </div>
 
-                <div className="mb-4">
+                <div className="w-full">
                   <label
                     htmlFor="message"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Order notes
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     id="message"
                     name="message"
                     placeholder="Type your message here..."
-                    // value={formData.message}
-                    // onChange={handleChange}
-                    rows={4}
-                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm  sm:text-sm"
-                    required
+                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm"
                   />
                 </div>
-                <div className="flex justify-between -mb-5">
+
+                <div className="flex justify-between -mb-6 mt-5">
                   <button
                     className="mb-6 py-2 w-[37%] poppins-light text-sm tracking-wider"
                     onClick={() => setCurrent("cart")}
@@ -278,7 +269,7 @@ const CartPage = () => {
               </form>
             </div>
 
-            <div className="bg-white p-9 rounded-lg border-[#9C5E29] border-y-[20px]">
+            <div className="bg-white p-6 sm:p-9 rounded-lg border-[#9C5E29] border-y-[20px] border-x-[90px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
                 <img src={shoping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">
@@ -328,110 +319,100 @@ const CartPage = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="grid grid-cols-2fr-1fr gap-4 mt-9 px-36 py-8">
-            <div className="bg-white px-9 pt-14 rounded-lg">
-              <h2 className="text-xl font-bold mb-1 text-center text-[#9C5E29]">
-                Payment
-              </h2>
-              <p className="text-lg font-medium mb-7 text-center">
-                All transactions are secure and encrypted
-              </p>
-              <form>
-                <div className="flex justify-between items-center mb-4 bg-[#abcbf59e] p-3 rounded-t-lg">
-                  {/* <label className="flex text-xl font-medium items-center">
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="creditCard"
-                      className="appearance-none checked:bg-[#9C5E29] checked:border-l-8 mr-2 w-6 h-6"
-                    />
-                    Credit Card
-                  </label> */}
-
-                  <div>
-                    <label className="flex items-center space-x-2 text-xl font-medium cursor-pointer">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="creditCard"
-                        className="hidden"
-                        checked={selectedOption === "creditCard"}
-                        onChange={handleOptionChange}
-                      />
-                      <div className="w-6 h-6 flex items-center justify-center border-2 rounded-full border-black">
-                        {selectedOption === "creditCard" && (
-                          <div className="w-3 h-3 rounded-full bg-black"></div>
-                        )}
+        ) : current === "payment" ? (
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 mt-9 px-4 sm:px-16 lg:px-36 py-8">
+            <div className="bg-white p-6 sm:p-9 rounded-lg">
+              <div className="flex justify-center gap-2">
+                <div className="bg-white px-4 sm:px-6 lg:px-12 py-10 rounded-lg w-full lg:max-w-screen-lg mx-auto">
+                  <h2 className="text-2xl font-bold mb-4 text-center text-[#9C5E29]">
+                    Payment
+                  </h2>
+                  <p className="text-lg font-medium mb-8 text-center">
+                    All transactions are secure and encrypted
+                  </p>
+                  <form>
+                    <div className="flex flex-col sm:flex-row justify-between items-center mb-6 bg-[#abcbf59e] p-4 rounded-t-lg">
+                      <div className="mb-4 sm:mb-0">
+                        <label className="flex items-center space-x-2 text-xl font-medium cursor-pointer">
+                          <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="creditCard"
+                            className="hidden"
+                            checked={selectedOption === "creditCard"}
+                            onChange={handleOptionChange}
+                          />
+                          <div className="w-6 h-6 flex items-center justify-center border-2 rounded-full border-black">
+                            {selectedOption === "creditCard" && (
+                              <div className="w-3 h-3 rounded-full bg-black"></div>
+                            )}
+                          </div>
+                          <span>Credit Card</span>
+                        </label>
                       </div>
-                      <span>Credit Card</span>
-                    </label>
-                  </div>
-                  <div className="flex gap-2">
-                    <img src={visa} />
-                    <img src={mastercard} />
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    id="cardNumber"
-                    name="cardNumber"
-                    placeholder="Card number"
-                    // value={formData.cardNumber}
-                    // onChange={handleChange}
-                    className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
-                    required
-                  />
-                </div>
+                      <div className="flex gap-2">
+                        <img src={visa} alt="Visa" />
+                        <img src={mastercard} alt="Mastercard" />
+                      </div>
+                    </div>
+                    <div className="mb-6">
+                      <input
+                        type="text"
+                        id="cardNumber"
+                        name="cardNumber"
+                        placeholder="Card number"
+                        className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
+                        required
+                      />
+                    </div>
 
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    id="CardName"
-                    name="cardName"
-                    placeholder="Card Name"
-                    // value={formData.expirationDate}
-                    // onChange={handleChange}
-                    className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
-                    required
-                  />
+                    <div className="mb-6">
+                      <input
+                        type="text"
+                        id="CardName"
+                        name="cardName"
+                        placeholder="Card Name"
+                        className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
+                        required
+                      />
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row mb-6 gap-4">
+                      <div className="w-full">
+                        <input
+                          type="text"
+                          id="expirationDate"
+                          name="expirationDate"
+                          placeholder="Exp. Date (MM/YY)"
+                          className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full"
+                          required
+                        />
+                      </div>
+
+                      <div className="w-full">
+                        <input
+                          type="text"
+                          id="cvv"
+                          name="cvv"
+                          placeholder="CVV"
+                          className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="mt-6 px-4 py-3 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-white rounded-md w-full tracking-wide poppins-light"
+                    >
+                      PAY NOW
+                    </button>
+                  </form>
                 </div>
-
-                <div className="flex mb-4 gap-4">
-                  <div className="w-[50%]">
-                    <input
-                      type="text"
-                      id="expirationDate"
-                      name="expirationDate"
-                      placeholder="Exp. Date (MM/YY)"
-                      className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full"
-                      required
-                    />
-                  </div>
-
-                  <div className="w-[50%]">
-                    <input
-                      type="text"
-                      id="cvv"
-                      name="cvv"
-                      placeholder="CVV"
-                      className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className="mt-5 px-4 py-3 bg-[#9C5E29] text-white rounded-md w-full tracking-wide poppins-light"
-                >
-                  PAY NOW
-                </button>
-              </form>
+              </div>
             </div>
 
-            <div className="bg-white p-9 rounded-lg border-[#9C5E29] border-y-[20px]">
+            <div className="bg-white p-6 sm:p-9 rounded-lg border-[#9C5E29] border-y-[20px] border-x-[90px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
                 <img src={shoping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">
@@ -481,29 +462,18 @@ const CartPage = () => {
               </div>
             </div>
           </div>
-        )}
-        <hr />
-        {current === "payment" ? (
-          ""
-        ) : (
-          <div>
-            <p className="py-7 pl-7 text-2xl font-bold text-[#9C5E29]">
-              Recently Viewed
-            </p>
-            <div className="grid grid-cols-4 mt-[100px] place-items-center">
-              {recent_viewed.map((item) => (
-                <Recent
-                  key={item.id}
-                  name={item.name}
-                  price={item.price}
-                  image={item.image}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {current === "payment" ? "" : <Newsletter />}
+        ) : null}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10 sm:mt-[100px] place-items-center -mb-10">
+          {recent_viewed.map((item) => (
+            <Recent
+              key={item.id}
+              name={item.name}
+              price={item.price}
+              image={item.image}
+            />
+          ))}
+        </div>
+        <Newsletter />
         <Footer />
       </main>
     </div>

@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
+import Counter from "../Counter/Counter";
 
-const CartItem = ({ name, price, quantity, image, metal, size }) => {
+const CartItem = ({ name, price, image, metal, size }) => {
   return (
     <div className="relative flex justify-between items-center pl-[30px] pr-[10px] py-[25px] border-gray-300-transparent border-solid border-2 rounded-md my-4">
       <Icon icon="bi:x" className="absolute top-3 right-3" />
@@ -23,11 +24,7 @@ const CartItem = ({ name, price, quantity, image, metal, size }) => {
 
       <p className="flex items-center font-semibold">$ {price}</p>
 
-      <div className="flex items-center justify-between w-[10%] border-gray-300-transparent border-solid border-2 rounded-md px-2 h-9">
-        <button>-</button>
-        <p>{quantity}</p>
-        <button>+</button>
-      </div>
+      <Counter />
 
       <p className="text-[#9C5E29] font-bold flex items-center">$ {price}</p>
     </div>

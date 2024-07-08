@@ -1,3 +1,5 @@
+import Counter from "../Counter/Counter";
+
 const Product = ({ name, price, image }) => {
   return (
     <div className="product bg-[#383532] bg-opacity-25 flex flex-col items-center relative w-[300px] h-[180px] rounded-xl my-16">
@@ -11,11 +13,7 @@ const Product = ({ name, price, image }) => {
         <h1 className="text-[#9C5E29] font-extrabold">{name}</h1>
         <p className="text-[#9C5E29] text-xs font-semibold">$ {price}</p>
         <div className="flex justify-between px-4 w-[100%] text-white gap-3">
-          <div className="flex items-center justify-between w-[30%] border-gray-300-transparent border-solid border-2 rounded-md px-2">
-            <button>-</button>
-            <p>1</p>
-            <button>+</button>
-          </div>
+          <Counter />
           <button className="w-[60%] px-5 py-2 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-xs rounded-md">
             ADD TO CART
           </button>

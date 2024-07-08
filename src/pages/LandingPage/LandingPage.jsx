@@ -29,7 +29,7 @@ const LandingPage = () => {
               <input
                 type="text"
                 placeholder="Search"
-                className="bg-transparent border-none focus:outline-none px-2 text-white placeholder-white w-full"
+                className="poppins-light bg-transparent border-none focus:outline-none px-2 text-white placeholder-white w-full"
               />
               <button className="bg-[#9C5E29] p-1 rounded-full">
                 <img src={search} alt="Search Icon" />
@@ -48,7 +48,7 @@ const LandingPage = () => {
           Just for <span className="text-[#9C5E29]">You!</span>
         </h1>
 
-        <ul className="flex gap-4 sm:gap-8 md:gap-10 justify-center mx-auto my-4 text-sm sm:text-base md:text-lg lg:text-xl">
+        <ul className="poppins-bold flex gap-4 sm:gap-8 md:gap-10 justify-center mx-auto my-4 text-sm sm:text-base md:text-sm lg:text-lg">
           <li
             className={`cursor-pointer ${
               activeTab === "newArrivals" ? "text-[#9C5E29]" : "text-white"

@@ -26,3 +26,13 @@
   font-weight: 300;
   font-style: normal;
 }
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.poppins-bolder {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}

@@ -18,11 +18,10 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Function to scroll to top
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Optional: smooth scrolling animation
+      behavior: "smooth",
     });
   };
 
@@ -32,7 +31,7 @@ const Navbar = () => {
   }, [menu]);
 
   return (
-    <div className="fixed top-10 w-full z-50">
+    <div className="poppins-light fixed top-10 w-full z-50">
       <div className="max-w-[85%] mx-auto px-4 sm:px-6 lg:px-8 bg-white bg-opacity-20 backdrop-blur-md shadow-md rounded-xl border-[#9C5E29] border-[1px]">
         <div className="flex justify-between items-center h-16">
           <div className="w-[100px] flex flex-col items-center text-white">

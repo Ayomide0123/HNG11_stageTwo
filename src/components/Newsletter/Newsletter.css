@@ -1,12 +1,3 @@
-/* .newsletter {
-  background-image: url("../../assets/img/newsletter--bg-img.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 100vw;
-  height: 50vh;
-} */
-
 .newsletter-img {
   object-fit: cover; /* Ensure the entire image fits within the div */
   object-position: center; /* Center the image */

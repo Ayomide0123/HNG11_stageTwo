@@ -96,11 +96,9 @@ const Navbar = () => {
               >
                 <Icon icon="mdi:cart-outline" />
                 <p>Cart</p>
-                {cartItemsCount > 0 && (
-                  <span className="bg-[#720000] text-white rounded-full w-4 h-4 flex items-center justify-center absolute -top-2 left-2 text-[0.5rem]">
-                    {cartItemsCount}
-                  </span>
-                )}
+                <span className="bg-[#720000] text-white rounded-full w-4 h-4 flex items-center justify-center absolute -top-2 left-2 text-[0.5rem]">
+                  {cart.length}
+                </span>
               </Link>
             </div>
             <button

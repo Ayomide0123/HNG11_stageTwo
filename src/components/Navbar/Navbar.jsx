@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/img/mdi--ring.png";
 import { Icon } from "@iconify/react";
+import { useCart } from "../../context/CartContext";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("products");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { cart } = useCart();
 
   const cartItemsCount = 3; // Example count of cart items
 
@@ -44,28 +46,6 @@ const Navbar = () => {
             <ul className="flex gap-16 px-3">
               <li
                 className={`cursor-pointer flex justify-center ${
-                  menu === "home" ? "text-[#FB7400]" : "text-white"
-                }`}
-                onClick={() => setMenu("home")}
-              >
-                <div className="flex items-center gap-1">
-                  <Icon icon="material-symbols-light:home-outline" />
-                  <p>Home</p>
-                </div>
-              </li>
-              <li
-                className={`cursor-pointer flex justify-center ${
-                  menu === "about" ? "text-[#FB7400]" : "text-white"
-                }`}
-                onClick={() => setMenu("about")}
-              >
-                <div className="flex items-center gap-1">
-                  <Icon icon="clarity:avatar-line" />
-                  <p>About</p>
-                </div>
-              </li>
-              <li
-                className={`cursor-pointer flex justify-center ${
                   menu === "products" ? "text-[#FB7400]" : "text-white"
                 }`}
                 onClick={() => setMenu("products")}
@@ -93,11 +73,9 @@ const Navbar = () => {
                 >
                   <Icon icon="mdi:cart-outline" />
                   <p>Cart</p>
-                  {cartItemsCount > 0 && (
-                    <span className="bg-[#720000] text-white rounded-full w-4 h-4 flex items-center justify-center absolute -top-2 left-2 text-[0.5rem]">
-                      {cartItemsCount}
-                    </span>
-                  )}
+                  <span className="bg-[#720000] text-white rounded-full w-4 h-4 flex items-center justify-center absolute -top-2 left-2 text-[0.5rem]">
+                    {cart.length}
+                  </span>
                 </Link>
               </li>
             </ul>
@@ -138,34 +116,6 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="sm:hidden">
             <ul className="flex flex-col items-center gap-4 pb-2 bg-transparent">
-              <li
-                className={`cursor-pointer flex justify-center ${
-                  menu === "home" ? "text-[#FB7400]" : "text-white"
-                }`}
-                onClick={() => {
-                  setMenu("home");
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center gap-1">
-                  <Icon icon="material-symbols-light:home-outline" />
-                  <p>Home</p>
-                </div>
-              </li>
-              <li
-                className={`cursor-pointer flex justify-center ${
-                  menu === "about" ? "text-[#FB7400]" : "text-white"
-                }`}
-                onClick={() => {
-                  setMenu("about");
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center gap-1">
-                  <Icon icon="clarity:avatar-line" />
-                  <p>About</p>
-                </div>
-              </li>
               <li
                 className={`cursor-pointer flex justify-center ${
                   menu === "products" ? "text-[#FB7400]" : "text-white"

@@ -1,10 +1,14 @@
 import { Icon } from "@iconify/react";
 import Counter from "../Counter/Counter";
 
-const CartItem = ({ name, price, image, metal, size }) => {
+const CartItem = ({ id, name, price, image, metal, size, removeFromCart }) => {
   return (
     <div className="relative flex flex-col sm:flex-row justify-between items-center p-4 border-gray-300-transparent border-solid border-2 rounded-md my-4">
-      <Icon icon="bi:x" className="absolute top-3 right-3" />
+      <Icon
+        icon="bi:x"
+        className="absolute top-3 right-3 cursor-pointer"
+        onClick={() => removeFromCart(id)}
+      />
       <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
         <img src={image} className="w-[100px] h-auto" />
         <div className="text-center sm:text-left">

@@ -1,6 +1,12 @@
 import Counter from "../Counter/Counter";
+import { useCart } from "../../context/CartContext";
 
 const Recent = ({ name, price, image }) => {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({ name, price, image });
+  };
   return (
     <div className="product bg-[#383532] bg-opacity-25 flex flex-col items-center relative w-full max-w-[300px] h-[180px] rounded-xl mb-20 mx-auto sm:mx-0">
       <img
@@ -17,7 +23,10 @@ const Recent = ({ name, price, image }) => {
         </p>
         <div className="flex justify-between w-full text-white gap-2 sm:gap-3">
           <Counter />
-          <button className="w-[60%] px-2 py-1 sm:px-5 sm:py-2 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-xs sm:text-sm rounded-md">
+          <button
+            className="w-[60%] px-2 py-1 sm:px-5 sm:py-2 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-xs sm:text-sm rounded-md"
+            onClick={handleAddToCart}
+          >
             ADD TO CART
           </button>
         </div>

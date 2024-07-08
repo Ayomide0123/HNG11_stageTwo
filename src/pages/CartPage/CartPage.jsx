@@ -11,13 +11,15 @@ import Footer from "../../components/Footer/Footer";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useCart } from "../../context/CartContext";
 
 const CartPage = () => {
   const [current, setCurrent] = useState("cart");
-  const [selectedOption, setSelectedOption] = useState(""); // State to track selected option
+  const [selectedOption, setSelectedOption] = useState("");
+  const { cart, removeFromCart } = useCart();
 
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value); // Update selected option when radio button is clicked
+    setSelectedOption(event.target.value);
   };
   return (
     <div>
@@ -68,12 +70,12 @@ const CartPage = () => {
                   </h1>
                 </div>
                 <h1 className="text-[#9C5E29] font-bold text-lg sm:text-xl md:text-2xl">
-                  3 Items
+                  {cart.length} Items
                 </h1>
               </div>
               <hr />
               <div>
-                <ul className="hidden sm:flex  sm:flex-row py-5 pr-3 justify-between text-[#BDBDBD]">
+                <ul className="hidden sm:flex sm:flex-row py-5 pr-3 justify-between text-[#BDBDBD]">
                   <li className="mb-2 sm:mb-0">Product Details</li>
                   <li className="mb-2 sm:mb-0">Price</li>
                   <li className="mb-2 sm:mb-0">Quantity</li>
@@ -81,15 +83,17 @@ const CartPage = () => {
                 </ul>
               </div>
               <div className="-mt-4">
-                {cart_list.map((product) => (
+                {cart.map((product) => (
                   <CartItem
                     key={product.id}
+                    id={product.id}
                     name={product.name}
                     price={product.price}
                     quantity={product.quantity}
                     image={product.image}
                     metal={product.metal}
                     size={product.size}
+                    removeFromCart={removeFromCart}
                   />
                 ))}
               </div>

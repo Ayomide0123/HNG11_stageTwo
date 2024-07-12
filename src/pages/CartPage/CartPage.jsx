@@ -1,10 +1,10 @@
 import cartBgImg from "../../assets/img/cartPage--bg-img.png";
 import visa from "../../assets/img/visa-card.png";
 import mastercard from "../../assets/img/mastercard.png";
-import shoping_cart from "../../assets/img/shopping--cart.svg";
+import shopping_cart from "../../assets/img/shopping--cart.svg";
 import CartItem from "../../components/CartItems/CartItem";
-import cart_list from "./CartList";
 import Recent from "../../components/Recent/Recent";
+import cart_list from "./CartList";
 import recent_viewed from "../../components/Recent/RecentlyViewed";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
@@ -64,7 +64,7 @@ const CartPage = () => {
             <div className="lg:col-span-2 bg-white p-4 sm:p-6 md:p-8 rounded-lg">
               <div className="flex justify-between px-2 pb-3">
                 <div className="flex items-center gap-2">
-                  <img src={shoping_cart} className="w-6 sm:w-8 md:w-10" />
+                  <img src={shopping_cart} className="w-6 sm:w-8 md:w-10" />
                   <h1 className="text-[#9C5E29] font-bold text-lg sm:text-xl md:text-2xl">
                     Shopping Cart
                   </h1>
@@ -74,14 +74,13 @@ const CartPage = () => {
                 </h1>
               </div>
               <hr />
-              <div>
-                <ul className="hidden sm:flex sm:flex-row py-5 pr-3 justify-between text-[#BDBDBD]">
-                  <li className="mb-2 sm:mb-0">Product Details</li>
-                  <li className="mb-2 sm:mb-0">Price</li>
-                  <li className="mb-2 sm:mb-0">Quantity</li>
-                  <li>Total</li>
-                </ul>
+              <div className="hidden sm:grid grid-cols-4 py-5 pr-3 text-[#BDBDBD]">
+                <div className="mb-2 sm:mb-0 text-center">Product Details</div>
+                <div className="mb-2 sm:mb-0 text-center">Price</div>
+                <div className="mb-2 sm:mb-0 text-center">Quantity</div>
+                <div className="mb-2 sm:mb-0 text-center">Total</div>
               </div>
+
               <div className="-mt-4">
                 {cart.map((product) => (
                   <CartItem
@@ -98,7 +97,7 @@ const CartPage = () => {
                 ))}
               </div>
               <div className="flex justify-center">
-                <button className="px-4 py-2 w-full sm:w-1/2 bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider">
+                <button className="px-4 py-2 w-full sm:w-1/2 bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider mt-9">
                   <Link to="/">CONTINUE SHOPPING</Link>
                 </button>
               </div>
@@ -106,7 +105,7 @@ const CartPage = () => {
 
             <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] sm:border-x-[60px] border-x-[20px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
-                <img src={shoping_cart} className="w-6" />
+                <img src={shopping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">
                   Order Summary
                 </p>
@@ -277,7 +276,7 @@ const CartPage = () => {
 
             <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] sm:border-x-[60px] border-x-[20px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
-                <img src={shoping_cart} className="w-6" />
+                <img src={shopping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">
                   Order Summary
                 </p>
@@ -420,7 +419,7 @@ const CartPage = () => {
 
             <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg border-[#9C5E29] border-y-[20px] sm:border-x-[60px] border-x-[20px] lg:border-x-0">
               <div className="flex justify-center gap-2 my-4">
-                <img src={shoping_cart} className="w-6" />
+                <img src={shopping_cart} className="w-6" />
                 <p className="text-[#9C5E29] font-bold text-lg">
                   Order Summary
                 </p>
@@ -469,9 +468,10 @@ const CartPage = () => {
             </div>
           </div>
         ) : null}
+        <hr />
 
-        <div>
-          <div className="text-center text-[#9C5E29] font-bold text-xl pb-7 sm:pb-1 md:text-left md:pl-7 md:py-7">
+        <div className="pb-7 sm:pb-1 md:pl-7 md:py-7">
+          <div className="text-center text-[#9C5E29] font-bold text-xl  md:text-left md:pl-[5%] py-7">
             Recently Viewed
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10 sm:mt-[100px] place-items-center -mb-10">

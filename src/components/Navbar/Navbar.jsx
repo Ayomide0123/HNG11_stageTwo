@@ -10,8 +10,6 @@ const Navbar = () => {
   const location = useLocation();
   const { cart } = useCart();
 
-  const cartItemsCount = 3; // Example count of cart items
-
   const getFillColor = (path) => {
     return location.pathname === path ? "#FB7400" : "white";
   };
@@ -33,12 +31,14 @@ const Navbar = () => {
   }, [menu]);
 
   return (
-    <div className="poppins-light fixed top-10 w-full z-50">
+    <div className="absolute poppins-light top-10 w-full z-50">
       <div className="max-w-[85%] mx-auto px-4 sm:px-6 lg:px-8 bg-white bg-opacity-20 backdrop-blur-md shadow-md rounded-xl border-[#9C5E29] border-[1px]">
         <div className="flex justify-between items-center h-16">
-          <div className="w-[100px] flex flex-col items-center text-white">
-            <img src={logo} width="24px" height="auto" alt="Logo" />
-            <p className="logo--text -mt-2">Bling</p>
+          <div className="w-[100px] text-white">
+            <Link to="/" className="flex flex-col items-center">
+              <img src={logo} width="24px" height="auto" alt="Logo" />
+              <p className="logo--text -mt-2">Bling</p>
+            </Link>
           </div>
 
           {/* Navbar Links for Desktop */}

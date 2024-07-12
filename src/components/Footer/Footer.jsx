@@ -1,12 +1,15 @@
 import logo from "../../assets/img/mdi--ring.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="bg-[#9C5E29] text-white">
       <div className="flex flex-col md:flex-row justify-between items-center px-6 sm:px-8 md:px-12 py-3">
-        <div className="w-[100px] flex flex-col items-center text-white mb-4 md:mb-0">
-          <img src={logo} width="24px" height="auto" alt="Logo" />
-          <p className="logo--text -mt-2">Bling</p>
+        <div className="w-[100px] text-white">
+          <Link to="/" className="flex flex-col items-center">
+            <img src={logo} width="24px" height="auto" alt="Logo" />
+            <p className="logo--text -mt-2">Bling</p>
+          </Link>
         </div>
 
         <div className="poppins-light mb-4 md:mb-0">

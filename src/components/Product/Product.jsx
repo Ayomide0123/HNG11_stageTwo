@@ -1,11 +1,11 @@
 import Counter from "../Counter/Counter";
 import { useCart } from "../../context/CartContext";
 
-const Product = ({ name, price, image }) => {
+const Product = ({ name, price, image, metal, size }) => {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
-    addToCart({ name, price, image });
+    addToCart({ name, price, image, metal, size });
   };
 
   return (

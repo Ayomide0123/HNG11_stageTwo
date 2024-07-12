@@ -18,6 +18,8 @@ const CartPage = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const { cart, removeFromCart } = useCart();
 
+  console.log(cart);
+
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };

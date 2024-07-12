@@ -20,7 +20,7 @@ const CartItem = ({ id, name, price, image, metal, size, removeFromCart }) => {
             {metal}
           </p>
           <p className="text-sm font-semibold">
-            <span className="text-[#BDBDBD]">Size: </span>
+            <span className="text-[#BDBDBD]">size: </span>
             {size} cm
           </p>
         </div>

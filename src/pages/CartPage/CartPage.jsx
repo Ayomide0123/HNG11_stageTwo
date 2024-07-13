@@ -133,8 +133,6 @@ const CartPage = () => {
                     price={product.price}
                     quantity={product.quantity}
                     image={product.image}
-                    metal={product.metal}
-                    size={product.size}
                     removeFromCart={removeFromCart}
                   />
                 ))}
@@ -183,7 +181,7 @@ const CartPage = () => {
               <div className="flex justify-between my-6">
                 <p className="font-bold tracking-wide">Total Amount</p>
                 <p className="font-bold tracking-wide text-[#9C5E29]">
-                  $ 515,000
+                  NGN 515,000
                 </p>
               </div>
               <button
@@ -197,7 +195,7 @@ const CartPage = () => {
 
               <div className="mt-6">
                 <h1 className="flex items-center font-bold tracking-wide text-green-500">
-                  $ 200 OFF your next ORDER
+                  NGN 500 OFF your next ORDER
                 </h1>
               </div>
             </div>
@@ -354,7 +352,7 @@ const CartPage = () => {
               <div className="flex justify-between my-6">
                 <p className="font-bold tracking-wide">Total Amount</p>
                 <p className="font-bold tracking-wide text-[#9C5E29]">
-                  $ 515,000
+                  NGN 515,000
                 </p>
               </div>
 
@@ -362,7 +360,7 @@ const CartPage = () => {
 
               <div className="mt-6">
                 <h1 className="flex items-center font-bold tracking-wide text-green-500">
-                  $ 200 OFF your next ORDER
+                  NGN 200 OFF your next ORDER
                 </h1>
               </div>
             </div>
@@ -389,6 +387,7 @@ const CartPage = () => {
                             className="hidden"
                             checked={selectedOption === "creditCard"}
                             onChange={handleOptionChange}
+                            required
                           />
                           <div className="w-6 h-6 flex items-center justify-center border-2 rounded-full border-black">
                             {selectedOption === "creditCard" && (
@@ -501,7 +500,7 @@ const CartPage = () => {
               <div className="flex justify-between my-6">
                 <p className="font-bold tracking-wide">Total Amount</p>
                 <p className="font-bold tracking-wide text-[#9C5E29]">
-                  $ 515,000
+                  NGN 515,000
                 </p>
               </div>
 
@@ -509,7 +508,7 @@ const CartPage = () => {
 
               <div className="mt-6">
                 <h1 className="flex items-center font-bold tracking-wide text-green-500">
-                  $ 200 OFF your next ORDER
+                  NGN 500 OFF your next ORDER
                 </h1>
               </div>
             </div>

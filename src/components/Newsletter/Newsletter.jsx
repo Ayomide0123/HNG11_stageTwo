@@ -22,6 +22,7 @@ const Newsletter = () => {
               type="text"
               placeholder="Email"
               className=" poppins-light bg-transparent border-none focus:outline-none px-3 py-1 text-white placeholder-white w-full"
+              required
             />
           </div>
 

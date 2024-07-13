@@ -15,6 +15,7 @@ const LandingPage = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(3); // Set this to the actual total pages you have
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetchProducts(currentPage);
@@ -52,6 +53,28 @@ const LandingPage = () => {
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const addToCart = (product) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
+    if (existingProduct) {
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+                totalPrice: (item.quantity + 1) * item.price,
+              }
+            : item
+        )
+      );
+    } else {
+      setCart([
+        ...cart,
+        { ...product, quantity: 1, totalPrice: product.price },
+      ]);
     }
   };
 
@@ -137,6 +160,14 @@ const LandingPage = () => {
               name={product.name}
               image={`https://api.timbu.cloud/images/${product.photos[0].url}`}
               price={product.current_price[0]?.NGN[0]}
+              addToCart={() =>
+                addToCart({
+                  id: product.id,
+                  name: product.name,
+                  price: product.current_price[0]?.NGN[0],
+                  image: `https://api.timbu.cloud/images/${product.photos[0].url}`,
+                })
+              }
             />
           ))}
         </div>
@@ -159,6 +190,17 @@ const LandingPage = () => {
           >
             Next
           </button>
+        </div>
+
+        <div className="cart">
+          <ul>
+            {cart.map((item) => (
+              <li key={item.id}>
+                {item.name} - Quantity: {item.quantity} - Total Price:{" "}
+                {item.totalPrice} NGN
+              </li>
+            ))}
+          </ul>
         </div>
 
         <Newsletter />

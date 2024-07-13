@@ -19,7 +19,7 @@ const Recent = ({ name, price, image }) => {
           {name}
         </h1>
         <p className="text-[#9C5E29] text-xs sm:text-sm font-semibold">
-          $ {price}
+          NGN {price}
         </p>
         <div className="flex justify-between w-full text-white gap-2 sm:gap-3">
           <Counter />

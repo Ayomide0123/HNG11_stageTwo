@@ -10,7 +10,6 @@ const LandingPage = () => {
   const apiKey = import.meta.env.VITE_APP_API_KEY;
   const appId = import.meta.env.VITE_APP_APP_ID;
   const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
-  const apiBaseURL = import.meta.env.VITE_APP_BASE_URL;
   const [activeTab, setActiveTab] = useState("newArrivals");
   const [products, setProducts] = useState([]);
 
@@ -18,7 +17,7 @@ const LandingPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `${apiBaseURL}/api/products?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`
+          `/api/products?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

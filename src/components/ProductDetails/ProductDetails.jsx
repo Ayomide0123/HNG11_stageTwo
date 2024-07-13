@@ -8,7 +8,6 @@ const ProductDetails = () => {
   const { id } = useParams(); // Get the product ID from the URL
   const apiKey = import.meta.env.VITE_APP_API_KEY;
   const appId = import.meta.env.VITE_APP_APP_ID;
-  const apiBaseURL = import.meta.env.VITE_APP_BASE_URL;
   const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
   const [product, setProduct] = useState(null);
   const [productDetails, setProductDetails] = useState([]);
@@ -17,7 +16,7 @@ const ProductDetails = () => {
     const fetchProductDetails = async () => {
       try {
         const response = await fetch(
-          `${apiBaseURL}/extrainfo/products/${id}?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`,
+          `/extrainfo/products/${id}?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`,
           {
             headers: {
               Authorization: `Bearer ${apiKey}`,

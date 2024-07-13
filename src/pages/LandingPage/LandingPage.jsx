@@ -9,6 +9,7 @@ import Footer from "../../components/Footer/Footer";
 const LandingPage = () => {
   const apiKey = import.meta.env.VITE_APP_API_KEY;
   const appId = import.meta.env.VITE_APP_APP_ID;
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
   const [activeTab, setActiveTab] = useState("newArrivals");
   const [products, setProducts] = useState([]);
@@ -17,7 +18,7 @@ const LandingPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `/api/products?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`
+          `${apiUrl}/api/products?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

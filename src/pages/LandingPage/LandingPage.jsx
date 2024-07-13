@@ -10,35 +10,50 @@ const LandingPage = () => {
   const apiKey = import.meta.env.VITE_APP_API_KEY;
   const appId = import.meta.env.VITE_APP_APP_ID;
   const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
+
   const [activeTab, setActiveTab] = useState("newArrivals");
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(3); // Set this to the actual total pages you have
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(
-          `https://timbu-get-all-products.reavdev.workers.dev/?organization_id=${organizationId}&reverse_sort=false&page=1&size=10&Appid=${appId}&Apikey=${apiKey}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-          const data = await response.json();
-          setProducts(data.items);
-        } else {
-          console.error(
-            "Error: Expected JSON response, but received:",
-            await response.text()
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
+    fetchProducts(currentPage);
+  }, [currentPage]);
 
-    fetchProducts();
-  }, []);
+  const fetchProducts = async (page) => {
+    try {
+      const response = await fetch(
+        `https://timbu-get-all-products.reavdev.workers.dev/?organization_id=${organizationId}&reverse_sort=false&page=${page}&size=10&Appid=${appId}&Apikey=${apiKey}`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        const data = await response.json();
+        setProducts(data.items);
+      } else {
+        console.error(
+          "Error: Expected JSON response, but received:",
+          await response.text()
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <div>
@@ -125,6 +140,27 @@ const LandingPage = () => {
             />
           ))}
         </div>
+
+        <div className="flex justify-center my-4">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className="px-4 py-2 mx-2 bg-[#9C5E29] text-white rounded disabled:opacity-50"
+          >
+            Previous
+          </button>
+          <span className="px-4 py-2 mx-2 bg-white text-[#9C5E29] rounded">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 mx-2 bg-[#9C5E29] text-white rounded disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
+
         <Newsletter />
         <Footer />
       </main>

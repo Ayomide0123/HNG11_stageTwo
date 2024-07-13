@@ -17,13 +17,7 @@ const ProductDetails = () => {
     const fetchProductDetails = async () => {
       try {
         const response = await fetch(
-          `/extrainfo/products/${id}?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`,
-          {
-            headers: {
-              Authorization: `Bearer ${apiKey}`,
-              "Content-Type": "application/json",
-            },
-          }
+          `https://timbu-get-single-product.reavdev.workers.dev/${id}?organization_id=${organizationId}&reverse_sort=false&page=1&size=10&Appid=${appId}&Apikey=${apiKey}`
         );
 
         if (!response.ok) {
@@ -33,7 +27,7 @@ const ProductDetails = () => {
         const data = await response.json();
         setProduct(data);
         setProductDetails(data.extra_infos);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.error("Error fetching product details:", error);
       }

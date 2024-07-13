@@ -17,7 +17,7 @@ const LandingPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "https://timbu-get-all-products.reavdev.workers.dev/?organization_id=2b5cf4adf68e4f2fb730a14738224c49&reverse_sort=false&page=1&size=10&Appid=CDSR2TXMLLI1YFF&Apikey=dc2333ce6f5240048ccb730cd0b6045b20240712214234758757"
+          `https://timbu-get-all-products.reavdev.workers.dev/?organization_id=${organizationId}&reverse_sort=false&page=1&size=10&Appid=${appId}&Apikey=${apiKey}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

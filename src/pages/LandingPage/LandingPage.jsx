@@ -9,7 +9,6 @@ import Footer from "../../components/Footer/Footer";
 const LandingPage = () => {
   const apiKey = import.meta.env.VITE_APP_API_KEY;
   const appId = import.meta.env.VITE_APP_APP_ID;
-  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
   const [activeTab, setActiveTab] = useState("newArrivals");
   const [products, setProducts] = useState([]);
@@ -18,7 +17,7 @@ const LandingPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `${apiUrl}/api/products?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`
+          "https://timbu-get-all-products.reavdev.workers.dev/?organization_id=2b5cf4adf68e4f2fb730a14738224c49&reverse_sort=false&page=1&size=10&Appid=CDSR2TXMLLI1YFF&Apikey=dc2333ce6f5240048ccb730cd0b6045b20240712214234758757"
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

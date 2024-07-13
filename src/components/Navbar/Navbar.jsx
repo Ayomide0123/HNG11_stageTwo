@@ -25,7 +25,6 @@ const Navbar = () => {
     });
   };
 
-  // Scroll to top whenever menu state changes
   useEffect(() => {
     scrollToTop();
   }, [menu]);

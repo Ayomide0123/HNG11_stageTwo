@@ -1,19 +1,19 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #c7ccd9; /* Blue background color */
+  background-color: #c7ccd9;
   color: white;
   font-family: Arial, sans-serif;
 }
 
 .product-details-container {
-  min-height: 100vh; /* Ensure the container takes full height of the viewport */
-  padding: 6rem 1rem 2rem; /* Add top padding to account for navbar height */
+  min-height: 100vh;
+  padding: 6rem 1rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #c7ccd9; /* Blue background color */
+  background-color: #c7ccd9;
 }
 
 .product-details-content {
@@ -99,7 +99,7 @@ body {
 
 @media (max-width: 767px) {
   .product-details-container {
-    padding: 8rem 1rem 2rem; /* Adjust the padding for smaller screens */
+    padding: 8rem 1rem 2rem;
   }
 
   .product-details-content {

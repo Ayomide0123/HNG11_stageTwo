@@ -1,4 +1,4 @@
 .newsletter-img {
-  object-fit: cover; /* Ensure the entire image fits within the div */
-  object-position: center; /* Center the image */
+  object-fit: cover;
+  object-position: center;
 }

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
-import "./ProductDetails.css"; // Import the CSS file for styling
+import "./ProductDetails.css";
 
 const ProductDetails = () => {
   const { addToCart } = useCart();
-  const { id } = useParams(); // Get the product ID from the URL
+  const { id } = useParams();
   const apiKey = import.meta.env.VITE_APP_API_KEY;
   const appId = import.meta.env.VITE_APP_APP_ID;
 

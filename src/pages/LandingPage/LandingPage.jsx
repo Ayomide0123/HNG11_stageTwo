@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import bgImage from "../../assets/img/hero--bg-img.png";
 import search from "../../assets/img/search--icon.png";
 import "./LandingPage.css";
@@ -14,10 +14,9 @@ const LandingPage = () => {
   const [activeTab, setActiveTab] = useState("newArrivals");
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(3); // Set this to the actual total pages you have
+  const [totalPages, setTotalPages] = useState(3);
   const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true); // State for loading indicator
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchProducts(currentPage);
   }, [currentPage]);
@@ -43,7 +42,7 @@ const LandingPage = () => {
     } catch (error) {
       console.error("Error fetching products:", error);
     } finally {
-      setLoading(false); // Set loading to false after fetching
+      setLoading(false);
     }
   };
 
@@ -156,7 +155,6 @@ const LandingPage = () => {
         </ul>
 
         {loading ? (
-          // Loading skeleton or indicator while fetching data
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center px-4">
             {Array.from({ length: 6 }, (_, index) => (
               <div
@@ -178,7 +176,6 @@ const LandingPage = () => {
             ))}
           </div>
         ) : (
-          // Render products when not loading
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center px-4 mt-12">
             {products.map((product) => (
               <Product

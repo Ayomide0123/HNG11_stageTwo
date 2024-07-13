@@ -7,27 +7,36 @@ import CartItem from "../../components/CartItems/CartItem";
 // import recent_viewed from "../../components/Recent/RecentlyViewed";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useCart } from "../../context/CartContext";
 import createSale from "../../api/salesApi";
 
 const CartPage = () => {
-  const apiKey = import.meta.env.VITE_APP_API_KEY; // Get your API key
-  const appId = import.meta.env.VITE_APP_APP_ID; // Get your App ID
-  const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID; // Get your Organization ID
+  const apiKey = import.meta.env.VITE_APP_API_KEY;
+  const appId = import.meta.env.VITE_APP_APP_ID;
+  const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
   const [current, setCurrent] = useState("cart");
   const [selectedOption, setSelectedOption] = useState("");
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, updateCartItem } = useCart();
+  const [subtotal, setSubtotal] = useState(0);
 
-  // console.log(cart);
+  useEffect(() => {
+    if (cart && cart.length > 0) {
+      let total = 0;
+      cart.forEach((item) => {
+        total += item.price * item.quantity;
+      });
+      setSubtotal(total);
+    } else {
+      setSubtotal(0);
+    }
+  }, [cart]);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
-
-  // const { cart } = useCart(); // Assuming you have a way to access cart items
 
   const handleCheckout = async () => {
     const saleData = {
@@ -36,10 +45,10 @@ const CartPage = () => {
         product_id: item.id,
         amount: item.price,
         quantity: item.quantity,
-        currency_code: "NGN", // Adjust as per your requirements
+        currency_code: "NGN",
       })),
-      currency_code: "NGN", // Adjust as per your requirements
-      customer_title: "Mr", // Example values, adjust as needed
+      currency_code: "NGN",
+      customer_title: "Mr",
       first_name: "John",
       last_name: "Doe",
       email: "john.doe@email.com",
@@ -58,9 +67,7 @@ const CartPage = () => {
         appId
       );
       console.log("Sale created successfully:", response);
-      // Handle success scenario (e.g., clear cart, show success message)
     } catch (error) {
-      // Handle error (e.g., show error message)
       console.error("Error creating sale:", error);
     }
   };
@@ -134,6 +141,7 @@ const CartPage = () => {
                     quantity={product.quantity}
                     image={product.image}
                     removeFromCart={removeFromCart}
+                    updateCartItem={updateCartItem}
                   />
                 ))}
               </div>
@@ -161,19 +169,21 @@ const CartPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Sub Total</p>
-                  <p className="font-bold tracking-wide">$ 415,000</p>
+                  <p className="font-bold tracking-wide text-black">
+                    NGN {subtotal}
+                  </p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Item Discount</p>
-                  <p className="font-bold tracking-wide">$ 0.00</p>
+                  <p className="font-bold tracking-wide">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Coupon Discount</p>
-                  <p className="font-bold tracking-wide">$ 0.00</p>
+                  <p className="font-bold tracking-wide">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Shipping fee</p>
-                  <p className="font-bold tracking-wide">$ 100.00</p>
+                  <p className="font-bold tracking-wide">NGN 100.00</p>
                 </div>
               </div>
 
@@ -181,7 +191,7 @@ const CartPage = () => {
               <div className="flex justify-between my-6">
                 <p className="font-bold tracking-wide">Total Amount</p>
                 <p className="font-bold tracking-wide text-[#9C5E29]">
-                  NGN 515,000
+                  NGN {subtotal}
                 </p>
               </div>
               <button
@@ -332,19 +342,21 @@ const CartPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Sub Total</p>
-                  <p className="font-bold tracking-wide">$ 415,000</p>
+                  <p className="font-bold tracking-wide text-black">
+                    NGN {subtotal}
+                  </p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Item Discount</p>
-                  <p className="font-bold tracking-wide">$ 0.00</p>
+                  <p className="font-bold tracking-wide">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Coupon Discount</p>
-                  <p className="font-bold tracking-wide">$ 0.00</p>
+                  <p className="font-bold tracking-wide">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Shipping fee</p>
-                  <p className="font-bold tracking-wide">$ 100.00</p>
+                  <p className="font-bold tracking-wide">NGN 100.00</p>
                 </div>
               </div>
 
@@ -352,7 +364,7 @@ const CartPage = () => {
               <div className="flex justify-between my-6">
                 <p className="font-bold tracking-wide">Total Amount</p>
                 <p className="font-bold tracking-wide text-[#9C5E29]">
-                  NGN 515,000
+                  NGN {subtotal}
                 </p>
               </div>
 
@@ -480,19 +492,21 @@ const CartPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Sub Total</p>
-                  <p className="font-bold tracking-wide">$ 415,000</p>
+                  <p className="font-bold tracking-wide text-black">
+                    NGN {subtotal}
+                  </p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Item Discount</p>
-                  <p className="font-bold tracking-wide">$ 0.00</p>
+                  <p className="font-bold tracking-wide">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Coupon Discount</p>
-                  <p className="font-bold tracking-wide">$ 0.00</p>
+                  <p className="font-bold tracking-wide">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Shipping fee</p>
-                  <p className="font-bold tracking-wide">$ 100.00</p>
+                  <p className="font-bold tracking-wide">NGN 100.00</p>
                 </div>
               </div>
 
@@ -500,7 +514,7 @@ const CartPage = () => {
               <div className="flex justify-between my-6">
                 <p className="font-bold tracking-wide">Total Amount</p>
                 <p className="font-bold tracking-wide text-[#9C5E29]">
-                  NGN 515,000
+                  NGN {subtotal}
                 </p>
               </div>
 

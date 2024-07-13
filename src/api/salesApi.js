@@ -13,10 +13,10 @@ const createSale = async (saleData, organizationId, apiKey, appId) => {
       },
     });
 
-    return response.data; // Assuming API returns JSON response
+    return response.data;
   } catch (error) {
     console.error("Error creating sale:", error);
-    throw error; // Handle error appropriately in your application
+    throw error;
   }
 };
 

@@ -3,7 +3,11 @@ import { createContext, useContext, useState } from "react";
 const CartContext = createContext();
 
 export const useCart = () => {
-  return useContext(CartContext);
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
 };
 
 export const CartProvider = ({ children }) => {
@@ -17,15 +21,25 @@ export const CartProvider = ({ children }) => {
           item.id === product.id
             ? {
                 ...item,
-                quantity: product.quantity,
-                totalPrice: product.totalPrice,
+                quantity: item.quantity + product.quantity,
+                totalPrice: (item.quantity + product.quantity) * item.price,
               }
             : item
         );
       } else {
-        return [...prevCart, product];
+        return [...prevCart, { ...product, totalPrice: product.price }];
       }
     });
+  };
+
+  const updateCartItem = (id, quantity) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity, totalPrice: quantity * item.price }
+          : item
+      )
+    );
   };
 
   const removeFromCart = (id) => {
@@ -33,7 +47,9 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, updateCartItem }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import bgImage from "../../assets/img/hero--bg-img.png";
 import search from "../../assets/img/search--icon.png";
 import "./LandingPage.css";
@@ -16,6 +16,7 @@ const LandingPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(3); // Set this to the actual total pages you have
   const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true); // State for loading indicator
 
   useEffect(() => {
     fetchProducts(currentPage);
@@ -41,6 +42,8 @@ const LandingPage = () => {
       }
     } catch (error) {
       console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false); // Set loading to false after fetching
     }
   };
 
@@ -152,25 +155,50 @@ const LandingPage = () => {
           </li>
         </ul>
 
-        <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center px-4">
-          {products.map((product) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              image={`https://api.timbu.cloud/images/${product.photos[0].url}`}
-              price={product.current_price[0]?.NGN[0]}
-              addToCart={() =>
-                addToCart({
-                  id: product.id,
-                  name: product.name,
-                  price: product.current_price[0]?.NGN[0],
-                  image: `https://api.timbu.cloud/images/${product.photos[0].url}`,
-                })
-              }
-            />
-          ))}
-        </div>
+        {loading ? (
+          // Loading skeleton or indicator while fetching data
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center px-4">
+            {Array.from({ length: 6 }, (_, index) => (
+              <div
+                key={index}
+                className="bg-white p-4 rounded-lg animate-pulse shadow-md"
+              >
+                <div className="h-48 bg-gray-200 rounded-md"></div>
+                <div className="mt-4 h-6 bg-gray-300 rounded-md"></div>
+                <div className="mt-2 h-6 bg-gray-300 rounded-md"></div>
+                <div className="flex justify-between items-center mt-4">
+                  <div className="h-6 w-20 bg-gray-300 rounded-md"></div>
+                  <div className="flex gap-2 items-center">
+                    <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+                    <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+                    <div className="h-6 w-6 bg-gray-300 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          // Render products when not loading
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center px-4 mt-12">
+            {products.map((product) => (
+              <Product
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                image={`https://api.timbu.cloud/images/${product.photos[0].url}`}
+                price={product.current_price[0]?.NGN[0]}
+                addToCart={() =>
+                  addToCart({
+                    id: product.id,
+                    name: product.name,
+                    price: product.current_price[0]?.NGN[0],
+                    image: `https://api.timbu.cloud/images/${product.photos[0].url}`,
+                  })
+                }
+              />
+            ))}
+          </div>
+        )}
 
         <div className="flex justify-center my-4">
           <button

@@ -3,25 +3,66 @@ import visa from "../../assets/img/visa-card.png";
 import mastercard from "../../assets/img/mastercard.png";
 import shopping_cart from "../../assets/img/shopping--cart.svg";
 import CartItem from "../../components/CartItems/CartItem";
-import Recent from "../../components/Recent/Recent";
-import cart_list from "./CartList";
-import recent_viewed from "../../components/Recent/RecentlyViewed";
+// import Recent from "../../components/Recent/Recent";
+// import recent_viewed from "../../components/Recent/RecentlyViewed";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useCart } from "../../context/CartContext";
+import createSale from "../../api/salesApi";
 
 const CartPage = () => {
+  const apiKey = import.meta.env.VITE_APP_API_KEY; // Get your API key
+  const appId = import.meta.env.VITE_APP_APP_ID; // Get your App ID
+  const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID; // Get your Organization ID
   const [current, setCurrent] = useState("cart");
   const [selectedOption, setSelectedOption] = useState("");
   const { cart, removeFromCart } = useCart();
 
-  console.log(cart);
+  // console.log(cart);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+  };
+
+  // const { cart } = useCart(); // Assuming you have a way to access cart items
+
+  const handleCheckout = async () => {
+    const saleData = {
+      organization_id: organizationId,
+      products_sold: cart.map((item) => ({
+        product_id: item.id,
+        amount: item.price,
+        quantity: item.quantity,
+        currency_code: "NGN", // Adjust as per your requirements
+      })),
+      currency_code: "NGN", // Adjust as per your requirements
+      customer_title: "Mr", // Example values, adjust as needed
+      first_name: "John",
+      last_name: "Doe",
+      email: "john.doe@email.com",
+      phone: "1234567890",
+      country_code: "+234",
+      mode_of_payment: "bank transfer",
+      sales_status: "pending",
+      description: "Sold products from cart",
+    };
+
+    try {
+      const response = await createSale(
+        saleData,
+        organizationId,
+        apiKey,
+        appId
+      );
+      console.log("Sale created successfully:", response);
+      // Handle success scenario (e.g., clear cart, show success message)
+    } catch (error) {
+      // Handle error (e.g., show error message)
+      console.error("Error creating sale:", error);
+    }
   };
   return (
     <div>
@@ -411,6 +452,10 @@ const CartPage = () => {
                     <button
                       type="submit"
                       className="mt-6 px-4 py-3 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-white rounded-md w-full tracking-wide poppins-light"
+                      onClick={() => {
+                        handleCheckout;
+                        setCurrent("confirm");
+                      }}
                     >
                       PAY NOW
                     </button>
@@ -469,10 +514,38 @@ const CartPage = () => {
               </div>
             </div>
           </div>
+        ) : current === "confirm" ? (
+          <div className="flex justify-center items-center mt-9 px-4 sm:px-16 lg:px-36 py-8">
+            <div className="bg-white p-6 sm:p-9 rounded-lg">
+              <div className="flex text-[#9C5E29] justify-center items-center gap-2 my-4 mb-6">
+                <Icon icon="fa-solid:check-circle" className="text-green-500" />
+                <p className="font-bold text-2xl main--text">
+                  Payment Confirmed
+                </p>
+              </div>
+
+              <div className="mb-6">
+                <p className="text-[#9C5E29] text-center poppins-light">
+                  Your payment has been successfully confirmed. Thank you for
+                  your purchase!
+                </p>
+              </div>
+
+              <div className="text-[#9C5E29] flex justify-center">
+                <button
+                  className=" text-white
+                  w-[80%] px-2 py-1 sm:px-5 sm:py-2 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-sm sm:text-lg rounded-md font-bold"
+                  onClick={() => setCurrent("cart")}
+                >
+                  <Link to="#">Back to Cart</Link>
+                </button>
+              </div>
+            </div>
+          </div>
         ) : null}
         <hr />
 
-        <div className="pb-7 sm:pb-1 md:pl-7 md:py-7">
+        {/* <div className="pb-7 sm:pb-1 md:pl-7 md:py-7">
           <div className="text-center text-[#9C5E29] font-bold text-xl  md:text-left md:pl-[5%] py-7">
             Recently Viewed
           </div>
@@ -486,7 +559,7 @@ const CartPage = () => {
               />
             ))}
           </div>
-        </div>
+        </div> */}
         <Newsletter />
         <Footer />
       </main>

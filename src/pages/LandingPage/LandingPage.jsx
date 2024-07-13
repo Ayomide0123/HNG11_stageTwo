@@ -1,14 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import bgImage from "../../assets/img/hero--bg-img.png";
 import search from "../../assets/img/search--icon.png";
 import "./LandingPage.css";
-import product_list from "../../components/Product/Products";
 import Product from "../../components/Product/Product";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
 
 const LandingPage = () => {
+  const apiKey = import.meta.env.VITE_APP_API_KEY;
+  const appId = import.meta.env.VITE_APP_APP_ID;
+  const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
   const [activeTab, setActiveTab] = useState("newArrivals");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          `/api/products?organization_id=${organizationId}&Appid=${appId}&Apikey=${apiKey}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          const data = await response.json();
+          setProducts(data.items);
+        } else {
+          console.error(
+            "Error: Expected JSON response, but received:",
+            await response.text()
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div>
@@ -85,12 +115,13 @@ const LandingPage = () => {
         </ul>
 
         <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center px-4">
-          {product_list.map((product) => (
+          {products.map((product) => (
             <Product
               key={product.id}
+              id={product.id}
               name={product.name}
-              price={product.price}
-              image={product.image}
+              image={`https://api.timbu.cloud/images/${product.photos[0].url}`}
+              price={product.current_price[0]?.NGN[0]}
             />
           ))}
         </div>

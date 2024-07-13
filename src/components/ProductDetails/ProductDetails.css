@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #c7ccd9; /* Blue background color */
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.product-details-container {
+  min-height: 100vh; /* Ensure the container takes full height of the viewport */
+  padding: 6rem 1rem 2rem; /* Add top padding to account for navbar height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #c7ccd9; /* Blue background color */
+}
+
+.product-details-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+  background-color: #df9b575c;
+  border-radius: 8px;
+  place-items: center;
+}
+
+@media (min-width: 768px) {
+  .product-details-container {
+    padding: 8rem 1rem 2rem;
+  }
+
+  .product-details-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.product-details-image img {
+  width: 100%;
+}
+
+.product-details-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-name {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.product-description {
+  font-size: 1.25rem;
+}
+
+.details-heading,
+.price-heading {
+  font-size: 1.75rem;
+  font-weight: lighter;
+  margin-top: 1rem;
+}
+
+.details-list {
+  padding-left: 2rem;
+}
+
+.details-list li {
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.add-to-cart-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #9c5e29;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #bd783c;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 2rem;
+}
+
+@media (max-width: 767px) {
+  .product-details-container {
+    padding: 8rem 1rem 2rem; /* Adjust the padding for smaller screens */
+  }
+
+  .product-details-content {
+    padding: 1rem;
+  }
+
+  .product-name {
+    font-size: 1.5rem;
+  }
+
+  .product-description {
+    font-size: 1rem;
+  }
+
+  .details-heading,
+  .price-heading {
+    font-size: 1.5rem;
+  }
+
+  .product-price {
+    font-size: 1.25rem;
+  }
+
+  .add-to-cart-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}

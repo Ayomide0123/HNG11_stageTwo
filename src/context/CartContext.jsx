@@ -14,15 +14,12 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
-      // console.log("Initial load from localStorage:", JSON.parse(storedCart));
       return JSON.parse(storedCart);
     }
-    // console.log("Initial load: no cart found in localStorage.");
     return [];
   });
 
   useEffect(() => {
-    // console.log("Saving cart to localStorage:", cart);
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
@@ -62,9 +59,13 @@ export const CartProvider = ({ children }) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateCartItem }}
+      value={{ cart, addToCart, removeFromCart, updateCartItem, clearCart }}
     >
       {children}
     </CartContext.Provider>

@@ -20,7 +20,7 @@ const CartPage = () => {
   // const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
   const [current, setCurrent] = useState("cart");
   const [selectedOption, setSelectedOption] = useState("");
-  const { cart, removeFromCart, updateCartItem } = useCart();
+  const { cart, removeFromCart, updateCartItem, clearCart } = useCart();
   const [subtotal, setSubtotal] = useState(0);
   const [notification, setNotification] = useState(false);
 
@@ -37,9 +37,9 @@ const CartPage = () => {
     }
   }, [cart]);
 
-  const clearCart = () => {
-    cart.forEach((item) => removeFromCart(item.id));
-  };
+  // const clearCart = () => {
+  //   cart.forEach((item) => removeFromCart(item.id));
+  // };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -156,13 +156,14 @@ const CartPage = () => {
                     image={product.image}
                     removeFromCart={removeFromCart}
                     updateCartItem={updateCartItem}
+                    clearCart={clearCart}
                   />
                 ))}
               </div>
               <div className="flex justify-center">
                 <button
                   className="px-4 py-2 w-full sm:w-1/2 bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider mt-9"
-                  onClick={clearCart}
+                  // onClick={clearCart}
                 >
                   <Link to="/">CONTINUE SHOPPING</Link>
                 </button>
@@ -505,6 +506,7 @@ const CartPage = () => {
                     <button
                       type="submit"
                       className="mt-6 px-4 py-3 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-white rounded-md w-full tracking-wide poppins-light"
+                      onClick={clearCart}
                     >
                       PAY NOW
                     </button>
@@ -581,11 +583,8 @@ const CartPage = () => {
                   <span className="text-[#9C5E29] poppins-bolder">
                     {fullName}
                   </span>
-                  , Thank you for purchasing{" "}
-                  <span className="text-[#9C5E29] poppins-bolder">
-                    {cart.length} of our luxurious jewelries
-                  </span>
-                  , your payment has been successfully confirmed.
+                  , thank you for shopping with us, your payment has been
+                  successfully confirmed.
                 </p>
               </div>
 

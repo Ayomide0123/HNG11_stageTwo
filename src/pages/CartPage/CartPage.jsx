@@ -563,22 +563,26 @@ const CartPage = () => {
             <div className="bg-white p-6 sm:p-9 rounded-lg">
               <div className="flex text-[#9C5E29] justify-center items-center gap-2 my-4 mb-6">
                 <Icon icon="fa-solid:check-circle" className="text-green-500" />
-                <p className="font-bold text-2xl main--text">
+                <p className="font-extrabold text-4xl main--text">
                   Payment Confirmed
                 </p>
               </div>
 
               <div className="mb-6">
-                <p className="text-[#9C5E29] text-center poppins-light">
-                  Your payment has been successfully confirmed. Thank you for
+                <p className="text-black text-center poppins-bold text-lg">
+                  Hi{" "}
+                  <span className="text-[#9C5E29] poppins-bolder">
+                    {fullName}
+                  </span>
+                  , your payment has been successfully confirmed. Thank you for
                   your purchase!
                 </p>
               </div>
 
-              <div className="text-[#9C5E29] flex justify-center">
+              <div className="flex justify-center">
                 <button
                   className=" text-white
-                  w-[80%] px-2 py-1 sm:px-5 sm:py-2 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-sm sm:text-lg rounded-md font-bold"
+                  w-[60%] px-2 py-3 sm:px-5  bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-lg rounded-md font-bold"
                   onClick={() => setCurrent("cart")}
                 >
                   <Link to="#">Back to Cart</Link>

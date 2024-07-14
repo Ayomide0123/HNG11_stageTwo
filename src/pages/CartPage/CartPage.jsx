@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useCart } from "../../context/CartContext";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 // import createSale from "../../api/salesApi";
 
 const CartPage = () => {
@@ -36,6 +36,10 @@ const CartPage = () => {
       setSubtotal(0);
     }
   }, [cart]);
+
+  const clearCart = () => {
+    cart.forEach((item) => removeFromCart(item.id));
+  };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -156,7 +160,10 @@ const CartPage = () => {
                 ))}
               </div>
               <div className="flex justify-center">
-                <button className="px-4 py-2 w-full sm:w-1/2 bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider mt-9">
+                <button
+                  className="px-4 py-2 w-full sm:w-1/2 bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider mt-9"
+                  onClick={clearCart}
+                >
                   <Link to="/">CONTINUE SHOPPING</Link>
                 </button>
               </div>
@@ -574,8 +581,11 @@ const CartPage = () => {
                   <span className="text-[#9C5E29] poppins-bolder">
                     {fullName}
                   </span>
-                  , your payment has been successfully confirmed. Thank you for
-                  your purchase!
+                  , Thank you for purchasing{" "}
+                  <span className="text-[#9C5E29] poppins-bolder">
+                    {cart.length} of our luxurious jewelries
+                  </span>
+                  , your payment has been successfully confirmed.
                 </p>
               </div>
 
@@ -583,9 +593,8 @@ const CartPage = () => {
                 <button
                   className=" text-white
                   w-[60%] px-2 py-3 sm:px-5  bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-lg rounded-md font-bold"
-                  onClick={() => setCurrent("cart")}
                 >
-                  <Link to="#">Back to Cart</Link>
+                  <Link to="/">Continue Shopping</Link>
                 </button>
               </div>
             </div>

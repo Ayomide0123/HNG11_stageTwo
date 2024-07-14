@@ -12,6 +12,17 @@ const ProductDetails = () => {
   const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
   const [product, setProduct] = useState(null);
   const [productDetails, setProductDetails] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+
+  const increment = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -40,10 +51,15 @@ const ProductDetails = () => {
     addToCart({
       name: product.name,
       price:
-        product.current_price && product.current_price.NGN
-          ? product.current_price.NGN[0]
+        product.current_price && product.current_price
+          ? `${product.current_price}`
           : "Price not available",
       image: `https://api.timbu.cloud/images/${product.photos[0].url}`,
+      quantity: quantity,
+      totalPrice:
+        product.current_price && product.current_price
+          ? `${product.current_price * quantity}`
+          : "Price not available",
     });
   };
 
@@ -82,9 +98,24 @@ const ProductDetails = () => {
           <p className="product-price poppins-light">
             <span className="price-heading main--text">Price: </span>
             {product.current_price && product.current_price
-              ? `${product.current_price} NGN`
+              ? `${product.current_price * quantity} NGN`
               : "Price not available"}
           </p>
+          <div className="flex items-center justify-between w-[120px] border border-[#9C5E29] rounded-md px-2 py-1 bg-white shadow-sm m-auto mb-2">
+            <button
+              onClick={decrement}
+              className="text-black bg-[#df9b575c] hover:bg-[#bd783c] px-2 py-1 rounded-md"
+            >
+              -
+            </button>
+            <p className="text-[#9C5E29] font-semibold">{quantity}</p>
+            <button
+              onClick={increment}
+              className="text-black bg-[#df9b575c] hover:bg-[#bd783c] px-2 py-1 rounded-md"
+            >
+              +
+            </button>
+          </div>
 
           <button className="add-to-cart-btn" onClick={handleAddToCart}>
             Add to Cart

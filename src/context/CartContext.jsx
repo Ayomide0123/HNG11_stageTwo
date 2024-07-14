@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
@@ -11,7 +11,20 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      // console.log("Initial load from localStorage:", JSON.parse(storedCart));
+      return JSON.parse(storedCart);
+    }
+    // console.log("Initial load: no cart found in localStorage.");
+    return [];
+  });
+
+  useEffect(() => {
+    // console.log("Saving cart to localStorage:", cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -21,13 +34,16 @@ export const CartProvider = ({ children }) => {
           item.id === product.id
             ? {
                 ...item,
-                quantity: item.quantity + product.quantity,
-                totalPrice: (item.quantity + product.quantity) * item.price,
+                quantity: item.quantity + 1,
+                totalPrice: (item.quantity + 1) * item.price,
               }
             : item
         );
       } else {
-        return [...prevCart, { ...product, totalPrice: product.price }];
+        return [
+          ...prevCart,
+          { ...product, quantity: 1, totalPrice: product.price },
+        ];
       }
     });
   };

@@ -11,19 +11,22 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useCart } from "../../context/CartContext";
-import createSale from "../../api/salesApi";
+import { useParams } from "react-router-dom";
+// import createSale from "../../api/salesApi";
 
 const CartPage = () => {
-  const apiKey = import.meta.env.VITE_APP_API_KEY;
-  const appId = import.meta.env.VITE_APP_APP_ID;
-  const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
+  // const apiKey = import.meta.env.VITE_APP_API_KEY;
+  // const appId = import.meta.env.VITE_APP_APP_ID;
+  // const organizationId = import.meta.env.VITE_APP_ORGANIZATION_ID;
   const [current, setCurrent] = useState("cart");
   const [selectedOption, setSelectedOption] = useState("");
   const { cart, removeFromCart, updateCartItem } = useCart();
   const [subtotal, setSubtotal] = useState(0);
+  const [notification, setNotification] = useState(false);
 
   useEffect(() => {
     if (cart && cart.length > 0) {
+      // console.log(cart);
       let total = 0;
       cart.forEach((item) => {
         total += item.price * item.quantity;
@@ -38,39 +41,46 @@ const CartPage = () => {
     setSelectedOption(event.target.value);
   };
 
-  const handleCheckout = async () => {
-    const saleData = {
-      organization_id: organizationId,
-      products_sold: cart.map((item) => ({
-        product_id: item.id,
-        amount: item.price,
-        quantity: item.quantity,
-        currency_code: "NGN",
-      })),
-      currency_code: "NGN",
-      customer_title: "Mr",
-      first_name: "John",
-      last_name: "Doe",
-      email: "john.doe@email.com",
-      phone: "1234567890",
-      country_code: "+234",
-      mode_of_payment: "bank transfer",
-      sales_status: "pending",
-      description: "Sold products from cart",
-    };
-
-    try {
-      const response = await createSale(
-        saleData,
-        organizationId,
-        apiKey,
-        appId
-      );
-      console.log("Sale created successfully:", response);
-    } catch (error) {
-      console.error("Error creating sale:", error);
+  const handleCheckoutClick = () => {
+    if (cart.length === 0) {
+      setNotification(true);
+      setTimeout(() => setNotification(false), 3000); // Hide notification after 3 seconds
+    } else {
+      setCurrent("address");
     }
   };
+
+  // FORM LOGIC:
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const fullName = firstName + " " + lastName;
+
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [cvv, setCvv] = useState("");
+
+  const handleAddressSubmit = (e) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !address || !phone) {
+      // console.log("fill");
+    } else {
+      // console.log("Form submitted:", { firstName, lastName, phone, address });
+      setCurrent("payment");
+    }
+  };
+  const handlePaymentSubmit = (e) => {
+    e.preventDefault();
+    if (!cardName || !cardNumber || !expirationDate || !cvv) {
+      // console.log("fill");
+    } else {
+      setCurrent("confirm");
+    }
+  };
+
   return (
     <div>
       <header className="relative">
@@ -196,10 +206,16 @@ const CartPage = () => {
               </div>
               <button
                 className="mb-6 px-4 py-2 w-full bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider"
-                onClick={() => setCurrent("address")}
+                onClick={handleCheckoutClick}
               >
                 <Link>CHECKOUT</Link>
               </button>
+              {notification && (
+                <div className="text-red-500 text-sm mt-2 text-center">
+                  Your cart is empty. Please add items to your cart before
+                  proceeding to checkout.
+                </div>
+              )}
 
               <hr />
 
@@ -218,7 +234,7 @@ const CartPage = () => {
                 <p className="font-bold text-lg">Shipping Details</p>
               </div>
 
-              <form>
+              <form onSubmit={handleAddressSubmit}>
                 <div className="flex flex-nowrapwrap gap-3 mb-4">
                   <div className="w-full sm:w-[50%]">
                     <label
@@ -228,6 +244,8 @@ const CartPage = () => {
                       First Name *
                     </label>
                     <input
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                       type="text"
                       id="firstName"
                       name="firstName"
@@ -245,6 +263,8 @@ const CartPage = () => {
                       Last Name *
                     </label>
                     <input
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       type="text"
                       id="lastName"
                       name="lastName"
@@ -263,6 +283,8 @@ const CartPage = () => {
                     Address *
                   </label>
                   <input
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     type="text"
                     id="address"
                     name="address"
@@ -280,7 +302,9 @@ const CartPage = () => {
                     Phone *
                   </label>
                   <input
-                    type="number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    type="tel"
                     id="phone"
                     name="phone"
                     placeholder="+234"
@@ -297,6 +321,8 @@ const CartPage = () => {
                     Order notes
                   </label>
                   <input
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     type="text"
                     id="message"
                     name="message"
@@ -317,9 +343,10 @@ const CartPage = () => {
 
                   <button
                     className="mb-6 py-2 w-[37%] bg-[#9C5E29] text-white hover:bg-[#bd783c] transition-colors main--text rounded-md text-sm font-medium tracking-wider"
-                    onClick={() => setCurrent("payment")}
+                    // onClick={() => setCurrent("payment")}
+                    type="submit"
                   >
-                    <Link>PROCEED TO PAYMENT</Link>
+                    PROCEED TO PAYMENT
                   </button>
                 </div>
               </form>
@@ -388,7 +415,7 @@ const CartPage = () => {
                   <p className="text-lg font-medium mb-8 text-center text-black">
                     All transactions are secure and encrypted
                   </p>
-                  <form>
+                  <form onSubmit={handlePaymentSubmit}>
                     <div className="flex flex-col sm:flex-row justify-between items-center mb-6 bg-[#abcbf59e] p-4 rounded-t-lg">
                       <div className="mb-4 sm:mb-0">
                         <label className="flex items-center space-x-2 text-xl font-medium cursor-pointer">
@@ -416,6 +443,8 @@ const CartPage = () => {
                     </div>
                     <div className="mb-6">
                       <input
+                        value={cardNumber}
+                        onChange={(e) => setCardNumber(e.target.value)}
                         type="text"
                         id="cardNumber"
                         name="cardNumber"
@@ -427,10 +456,12 @@ const CartPage = () => {
 
                     <div className="mb-6">
                       <input
+                        value={cardName}
+                        onChange={(e) => setCardName(e.target.value)}
                         type="text"
                         id="CardName"
                         name="cardName"
-                        placeholder="Card Name"
+                        placeholder={fullName ? fullName : "Enter your Name"}
                         className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm text-black"
                         required
                       />
@@ -439,6 +470,8 @@ const CartPage = () => {
                     <div className="flex flex-col sm:flex-row mb-6 gap-4">
                       <div className="w-full">
                         <input
+                          value={expirationDate}
+                          onChange={(e) => setExpirationDate(e.target.value)}
                           type="text"
                           id="expirationDate"
                           name="expirationDate"
@@ -450,6 +483,8 @@ const CartPage = () => {
 
                       <div className="w-full">
                         <input
+                          value={cvv}
+                          onChange={(e) => setCvv(e.target.value)}
                           type="text"
                           id="cvv"
                           name="cvv"
@@ -463,10 +498,6 @@ const CartPage = () => {
                     <button
                       type="submit"
                       className="mt-6 px-4 py-3 bg-[#9C5E29] hover:bg-[#bd783c] transition-colors text-white rounded-md w-full tracking-wide poppins-light"
-                      onClick={() => {
-                        handleCheckout;
-                        setCurrent("confirm");
-                      }}
                     >
                       PAY NOW
                     </button>

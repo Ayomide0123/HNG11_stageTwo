@@ -175,15 +175,15 @@ const CartPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Item Discount</p>
-                  <p className="font-bold tracking-wide">NGN 0.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Coupon Discount</p>
-                  <p className="font-bold tracking-wide">NGN 0.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Shipping fee</p>
-                  <p className="font-bold tracking-wide">NGN 100.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
               </div>
 
@@ -232,7 +232,7 @@ const CartPage = () => {
                       id="firstName"
                       name="firstName"
                       placeholder="First name"
-                      className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
+                      className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm text-black"
                       required
                     />
                   </div>
@@ -249,7 +249,7 @@ const CartPage = () => {
                       id="lastName"
                       name="lastName"
                       placeholder="Last name"
-                      className="mt-1 px-3 py-3 border-gray-300 border-solid border-2 w-full rounded-md shadow-sm sm:text-sm"
+                      className="mt-1 px-3 py-3 border-gray-300 border-solid border-2 w-full rounded-md shadow-sm sm:text-sm text-black"
                       required
                     />
                   </div>
@@ -267,7 +267,7 @@ const CartPage = () => {
                     id="address"
                     name="address"
                     placeholder="Street address"
-                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm"
+                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm text-black"
                     required
                   />
                 </div>
@@ -284,7 +284,7 @@ const CartPage = () => {
                     id="phone"
                     name="phone"
                     placeholder="+234"
-                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm"
+                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm text-black"
                     required
                   />
                 </div>
@@ -301,7 +301,7 @@ const CartPage = () => {
                     id="message"
                     name="message"
                     placeholder="Type your message here..."
-                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm"
+                    className="mt-1 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md shadow-sm sm:text-sm text-black"
                   />
                 </div>
 
@@ -348,15 +348,15 @@ const CartPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Item Discount</p>
-                  <p className="font-bold tracking-wide">NGN 0.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Coupon Discount</p>
-                  <p className="font-bold tracking-wide">NGN 0.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Shipping fee</p>
-                  <p className="font-bold tracking-wide">NGN 100.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
               </div>
 
@@ -385,7 +385,7 @@ const CartPage = () => {
                   <h2 className="text-2xl font-bold mb-4 text-center text-[#9C5E29]">
                     Payment
                   </h2>
-                  <p className="text-lg font-medium mb-8 text-center">
+                  <p className="text-lg font-medium mb-8 text-center text-black">
                     All transactions are secure and encrypted
                   </p>
                   <form>
@@ -420,7 +420,7 @@ const CartPage = () => {
                         id="cardNumber"
                         name="cardNumber"
                         placeholder="Card number"
-                        className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
+                        className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm text-black"
                         required
                       />
                     </div>
@@ -431,7 +431,7 @@ const CartPage = () => {
                         id="CardName"
                         name="cardName"
                         placeholder="Card Name"
-                        className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm"
+                        className="mt-2 px-3 py-3 w-full border-gray-300 border-solid border-2 rounded-md sm:text-sm text-black"
                         required
                       />
                     </div>
@@ -443,7 +443,7 @@ const CartPage = () => {
                           id="expirationDate"
                           name="expirationDate"
                           placeholder="Exp. Date (MM/YY)"
-                          className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full"
+                          className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full text-black"
                           required
                         />
                       </div>
@@ -454,7 +454,7 @@ const CartPage = () => {
                           id="cvv"
                           name="cvv"
                           placeholder="CVV"
-                          className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full"
+                          className="mt-2 px-3 py-3 border-gray-300 border-solid border-2 rounded-md sm:text-sm w-full text-black"
                           required
                         />
                       </div>
@@ -498,15 +498,15 @@ const CartPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Item Discount</p>
-                  <p className="font-bold tracking-wide">NGN 0.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Coupon Discount</p>
-                  <p className="font-bold tracking-wide">NGN 0.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-[#BDBDBD]">Shipping fee</p>
-                  <p className="font-bold tracking-wide">NGN 100.00</p>
+                  <p className="font-bold tracking-wide text-black">NGN 0.00</p>
                 </div>
               </div>
 

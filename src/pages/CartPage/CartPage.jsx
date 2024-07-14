@@ -48,7 +48,7 @@ const CartPage = () => {
   const handleCheckoutClick = () => {
     if (cart.length === 0) {
       setNotification(true);
-      setTimeout(() => setNotification(false), 3000); // Hide notification after 3 seconds
+      setTimeout(() => setNotification(false), 3000);
     } else {
       setCurrent("address");
     }
